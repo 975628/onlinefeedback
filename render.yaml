@@ -2,14 +2,14 @@ services:
   - type: web
     name: onlinefeedback
     runtime: python
-    plan: starter
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python app.py
     envVars:
       - key: HOST
         value: 0.0.0.0
       - key: FEEDBACKHUB_DATA_DIR
-        value: /var/data
+        value: /tmp/feedbackhub
       - key: ADMIN_USERNAME
         value: admin
       - key: ADMIN_PASSWORD
@@ -22,7 +22,3 @@ services:
         value: "1"
       - key: FEEDBACK_RETENTION_DAYS
         value: "90"
-    disk:
-      name: feedback-data
-      mountPath: /var/data
-      sizeGB: 1
