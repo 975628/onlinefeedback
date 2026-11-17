@@ -107,10 +107,7 @@ def enforce_csrf():
     origin = request.headers.get("Origin")
     referer = request.headers.get("Referer")
 
-    if not origin and not referer:
-        abort(403, description="CSRF validation failed.")
-
-    if not is_same_origin(request):
+    if (origin or referer) and not is_same_origin(request):
         abort(403, description="CSRF validation failed.")
 
     token = (
