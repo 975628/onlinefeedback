@@ -150,3 +150,32 @@ Use a reverse proxy such as Caddy for public HTTPS:
 The app adds HSTS on HTTPS requests. Only enable `TRUST_PROXY=1` when the app is
 reachable solely through one trusted reverse proxy. Keep the operating system,
 Python packages, and database backups secured and up to date.
+
+## Deploy on Render with persistent feedback storage
+
+The included `render.yaml` configures a Render web service and a persistent
+disk mounted at `/var/data`. A paid web-service plan and persistent disk may
+incur charges; check Render's current pricing before creating the service. The
+disk keeps the SQLite database across deploys. Render provides an HTTPS URL, so
+a separate domain and Caddy installation are optional.
+
+1. Sign in to Render, create a Blueprint, and connect the
+   `975628/onlinefeedback` GitHub repository.
+2. Review the service and persistent-disk costs shown by Render before
+   confirming creation.
+3. When prompted, set `ADMIN_PASSWORD` to a strong unique password and
+   `FLASK_SECRET_KEY` to a separate random secret. Keep both in Render's
+   environment settings; never put them in GitHub or share them.
+4. Deploy the Blueprint. When the deployment finishes, open the Render URL and
+   check the feedback form and `/admin/login`.
+
+For example, generate values locally in PowerShell with:
+
+```powershell
+python -c "import secrets; print(secrets.token_urlsafe(24))"
+python -c "import secrets; print(secrets.token_hex(32))"
+```
+
+Use the first output as `ADMIN_PASSWORD` and the second as `FLASK_SECRET_KEY`.
+Save the password somewhere private so you can sign in later. The Render
+Blueprint does not contain either secret value.
