@@ -89,8 +89,7 @@ def is_same_origin(request_obj):
     for header_value in supplied_headers:
         parsed = urlparse(header_value)
         if (
-            parsed.scheme != expected_origin.scheme
-            or parsed.netloc != expected_origin.netloc
+            parsed.netloc != expected_origin.netloc
         ):
             return False
 
