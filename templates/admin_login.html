@@ -26,6 +26,16 @@
             </div>
             <button class="submit-btn" type="submit">Sign in</button>
         </form>
+        <details class="password-recovery">
+            <summary>Forgot password?</summary>
+            <p>For this demo, password resets are managed in Render:</p>
+            <ol>
+                <li>Open your service in the Render dashboard and go to <strong>Environment</strong>.</li>
+                <li>Set <code>ADMIN_PASSWORD</code> to a new, strong password. Do not change <code>FLASK_SECRET_KEY</code>.</li>
+                <li>Choose <strong>Save, rebuild, and deploy</strong>, then sign in with the new password after deployment completes.</li>
+            </ol>
+            <p>Keep the new password private. This app does not send password-reset emails.</p>
+        </details>
         <a class="login-back-link" href="{{ url_for('feedback_form') }}">Back to feedback form</a>
     </section>
 </main>

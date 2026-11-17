@@ -170,6 +170,11 @@ and Caddy installation are optional.
 4. Deploy the Blueprint. When the deployment finishes, open the Render URL and
    check the feedback form and `/admin/login`.
 
+If you forget the admin password, open the service's **Environment** page in
+Render, replace `ADMIN_PASSWORD` with a new strong password, and choose
+**Save, rebuild, and deploy**. Leave `FLASK_SECRET_KEY` unchanged; this demo
+does not provide email-based password recovery.
+
 For example, generate values locally in PowerShell with:
 
 ```powershell

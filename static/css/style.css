@@ -330,6 +330,11 @@ td {
 .login-card h1 { margin-bottom: 8px; font-size: 26px; }
 .login-description { margin-bottom: 24px; color: #64748b; font-size: 14px; }
 .login-card .submit-btn { margin-top: 5px; }
+.password-recovery { margin-top: 20px; color: #64748b; font-size: 13px; }
+.password-recovery summary { width: fit-content; color: #2563eb; cursor: pointer; }
+.password-recovery p { margin: 12px 0 8px; line-height: 1.5; }
+.password-recovery ol { margin: 0 0 8px; padding-left: 20px; line-height: 1.6; }
+.password-recovery code { color: #334155; }
 .login-back-link { display: block; margin-top: 20px; color: #64748b; font-size: 13px; text-align: center; }
 .login-back-link:hover { color: #2563eb; }
 
