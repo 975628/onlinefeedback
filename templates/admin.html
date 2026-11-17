@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="sidebar">
+        <h2>FeedbackHub</h2>
+
+        <ul>
+            <li class="active">Dashboard</li>
+            <li>All Feedback</li>
+            <li>Analytics</li>
+            <li>Settings</li>
+        </ul>
+
+        <form class="logout-form" action="{{ url_for('admin_logout') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button class="logout" type="submit">Logout</button>
+        </form>
+    </div>
+
+    <div class="main-content">
+
+        <header>
+            <div>
+                <h1>Admin Dashboard</h1>
+                <p>Welcome back, Admin!</p>
+            </div>
+            <div class="admin-profile">Admin</div>
+        </header>
+
+        <!-- Statistics Cards -->
+
+        <div class="stats-container">
+
+            <div class="stat-card">
+                <h3>Total Feedback</h3>
+                <h2>{{ total_feedback|default(0) }}</h2>
+                <p>All submissions</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Average Rating</h3>
+                <h2>{{ average_rating|default(0) }}</h2>
+                <p>Out of 5 stars</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>5 Star Ratings</h3>
+                <h2>{{ five_star|default(0) }}</h2>
+                <p>Excellent feedback</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Recent Feedback</h3>
+                <h2>{{ recent_feedback|default(0) }}</h2>
+                <p>Latest submissions</p>
+            </div>
+
+        </div>
+
+        <!-- Chart Section -->
+
+        <div class="chart-section">
+
+            <div class="chart-card">
+                <h3>Rating Distribution</h3>
+                <canvas id="ratingChart" data-values='{{ rating_distribution|tojson }}' aria-label="Rating distribution chart">Rating distribution data: {{ rating_distribution|tojson }}</canvas>
+            </div>
+
+        </div>
+
+        <!-- Feedback Table -->
+
+        <div class="table-section">
+
+            <div class="table-heading">
+                <h2>Recent Feedback</h2>
+                <a href="/export-csv">Export CSV</a>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Rating</th>
+                            <th>Comments</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in feedbacks %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.email }}</td>
+                            <td>{{ item.rating }} ⭐</td>
+                            <td>{{ item.comments }}</td>
+                            <td>{{ item.date_submitted }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6">No feedback available yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
